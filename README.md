@@ -19,6 +19,10 @@ Box del sistema operativo CentOS 6.5 o superior
 
 Deberá realizar el aprovisionamiento de un ambiente compuesto por los siguientes elementos: un servidor encargado de realizar balanceo de carga, dos servidores web (puede emplear apache+php o crear un servicio web con el lenguaje de su preferencia) y un servidor de base de datos (postgresql o mysql). Se debe probar el funcionamiento del balanceador a través de una aplicación web que realice consultas a la base de datos a través de los servidores web (mostrar visualmente cual servidor web atiende la petición)
 
+# Arquitectura del problema
+
+
+
 # Desarrollo
 
 Para poder desarrollar esta actividad se escogió como servidor el programa Nginx para que tome el rol de balanceador de cargas, ya que en la red lo sugieren como uno de los mejores sistemas para realizar dicha actividad.
@@ -212,8 +216,15 @@ De manera ordenada continuamos con las siguientes carpetas llamadas templates/de
 
 Después de configurar, el VagrantFile, y las recetas de cada una de las carpetas de "cookbooks" correctamente, procedemos a ubicarnos en la carpeta donde esta almacenada el archivo "Vagratfile" y a continuación ejecutamos el comando `vagrant up`, el cual de manera automatica comienza a levantar las cuatro máquinas virtuales con sus respectivas especificaciones configuradas en el vagrantfile de manera automatica
 
-
+# Evidencia del funcionamiento del balanceador de cargas 
 
 
 # Problemas presentados durante el desarrollo de la actividad
 
+El primer problema presentado durante el desarrollo de esta actividad, fue al tratar de instalar nginx ya que como anteriormente lo mencionaba para poder hacer la correcta instalación toca cambiar el repositorio, o si no el trata de descargar las configuraciones del repositorio que tiene por defecto y durante la instalación ocurre el error.
+
+El segundo problema presentado fue 
+
+
+
+# Conclusión
