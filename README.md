@@ -21,7 +21,7 @@ Deberá realizar el aprovisionamiento de un ambiente compuesto por los siguiente
 
 # Arquitectura del problema
 
-
+![01_diagrama_despliegue](https://cloud.githubusercontent.com/assets/23728734/23819964/8cacf2ea-05dc-11e7-8e31-656d16be84d7.png)
 
 # Desarrollo
 
