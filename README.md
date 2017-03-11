@@ -2,7 +2,10 @@
 Balanceador de cargas automatizado 
 
 Daniel Steven Ocampo
+
 14103032
+
+https://github.com/DanielOcampo23/Balanceador-de-cargas
 
 # Objetivos
 
@@ -30,7 +33,7 @@ Para poder desarrollar esta actividad se escogió como servidor el programa Ngin
 
 # Instalación de Nginx como balanceador de cargas
 
-1. Para poder instalar el Nginx se requiere añadir el repositorio de los desarrolladores de Nginx, eso se necesita para poder obtener la última versión estable de Nginx, ya que el repositorio de Centos puede tener una versión obsoleta o puede presentar problemas al intentar obtener las librerías requeridas para su instalación. Para agregar este repositorio es necesario crear el archivo `nginx.repo` en la ruta `/etc/yum.repos.d/` y agregar las siguientes líneas en este archivo.
+- Para poder instalar el Nginx se requiere añadir el repositorio de los desarrolladores de Nginx, eso se necesita para poder obtener la última versión estable de Nginx, ya que el repositorio de Centos puede tener una versión obsoleta o puede presentar problemas al intentar obtener las librerías requeridas para su instalación. Para agregar este repositorio es necesario crear el archivo `nginx.repo` en la ruta `/etc/yum.repos.d/` y agregar las siguientes líneas en este archivo.
 
 
 ```
@@ -42,7 +45,7 @@ enabled=1
 ```
 Para mayor información visitar la página oficial de Nginx https://www.nginx.com/resources/wiki/start/topics/tutorials/install/
 
-2. Ejecutar el siguiente comando en la terminar para realizar la instalación 
+- Ejecutar el siguiente comando en la terminar para realizar la instalación 
 ```
 yum -y install nginx
 ```
