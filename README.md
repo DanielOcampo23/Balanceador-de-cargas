@@ -33,7 +33,7 @@ Para poder desarrollar esta actividad se escogió como servidor el programa Ngin
 
 # Instalación de Nginx como balanceador de cargas
 
-- Para poder instalar el Nginx se requiere añadir el repositorio de los desarrolladores de Nginx, eso se necesita para poder obtener la última versión estable de Nginx, ya que el repositorio de Centos puede tener una versión obsoleta o puede presentar problemas al intentar obtener las librerías requeridas para su instalación. Para agregar este repositorio es necesario crear el archivo `nginx.repo` en la ruta `/etc/yum.repos.d/` y agregar las siguientes líneas en este archivo.
+1- Para poder instalar el Nginx se requiere añadir el repositorio de los desarrolladores de Nginx, eso se necesita para poder obtener la última versión estable de Nginx, ya que el repositorio de Centos puede tener una versión obsoleta o puede presentar problemas al intentar obtener las librerías requeridas para su instalación. Para agregar este repositorio es necesario crear el archivo `nginx.repo` en la ruta `/etc/yum.repos.d/` y agregar las siguientes líneas en este archivo.
 
 
 ```
@@ -45,22 +45,22 @@ enabled=1
 ```
 Para mayor información visitar la página oficial de Nginx https://www.nginx.com/resources/wiki/start/topics/tutorials/install/
 
-- Ejecutar el siguiente comando en la terminar para realizar la instalación 
+2- Ejecutar el siguiente comando en la terminar para realizar la instalación 
 ```
 yum -y install nginx
 ```
 
-3. Realizar la apertura del puerto 8080 en el cual se va a levantar el servicio del balanceador de carga, utilizando la utilidad iptables
+3- Realizar la apertura del puerto 8080 en el cual se va a levantar el servicio del balanceador de carga, utilizando la utilidad iptables
 ```
 iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
 ```
 
-4. Guardar la configuración del iptables
+4- Guardar la configuración del iptables
 ```
 service iptables save
 ```
 
-5. Para poder que el Nginx pueda re direccionar correctamente las peticiones hacia los dos servidores web descriptos en el Diagrama de deployment mostrado anteriormente. Para esto se debe modificar el archivo de configuración de Ngnix que se encuentra en la ruta `/etc/nginx/nginx.conf` 
+5- Para poder que el Nginx pueda re direccionar correctamente las peticiones hacia los dos servidores web descriptos en el Diagrama de deployment mostrado anteriormente. Para esto se debe modificar el archivo de configuración de Ngnix que se encuentra en la ruta `/etc/nginx/nginx.conf` 
 
 ```
 worker_processes  1;
@@ -84,12 +84,12 @@ http {
 }
 ```
 
-6. Antes de levantar el servicio de Nginx primero garantizamos de que no haya ningún servidor web apache corriendo en la máquina, para esto ejecutamos el siguiente comando
+6- Antes de levantar el servicio de Nginx primero garantizamos de que no haya ningún servidor web apache corriendo en la máquina, para esto ejecutamos el siguiente comando
 ```
 service httpd stop 
 ```
 
-7. Inicializamos el servicio de Nginx
+7- Inicializamos el servicio de Nginx
 ```
 nginx
 ```
@@ -100,7 +100,7 @@ Los comandos anteriormente mencionados son utilizados para configurar paso a pas
 Para nuestro ejercicio vamos a configurar cuatro máquinas virtuales: dos máquinas virtuales donde se van alojar los servidores web (Apache), 1 máquina virtual para la base de datos (Mysql), y una máquina virtual para el balanceador de cargas (nginx).
 Las 3 primeras máquinas virtuales se trabajaron en clases previas, en esta sección vamos a exponer la automatización de la última máquina virtual (balanceador de cargas con nginx)
 
-1. Configuración del archivo VagrantFile
+1- Configuración del archivo VagrantFile
 En este archivo es donde se especifican las configuraciones iniciales para levantar las 4 maquinas virtuales de manera automática (Nombre de la máquina, box del sistema operativo, ip privada y publica de la maquina, los recursos con los que va a trabajar la máquina virtual, y la ruta donde se encuentran las recetas, los archivos, los atributos, y los templates). Estas máquinas virtuales serán levantas utilizando VirtualBox.
 
 A continuación se expone el VagrantFile utilizado en nuestro ejercicio.
@@ -166,7 +166,7 @@ config.vm.define :centos_bc do |bc|
 end	
 ```
 
-2. Configuración de los cookbooks para la máquina balanceadora de cargas
+2- Configuración de los cookbooks para la máquina balanceadora de cargas
 
 A continuación mostraré únicamente el árbol de carpetas de la máquina que esta encargada de hacer el balanceo de cargas
 
@@ -216,13 +216,16 @@ En este vemos todos los pasos previamente explicados, pero para ser ejecutados d
 
 De manera ordenada continuamos con las siguientes carpetas llamadas templates/default y con dos archivos, llamados "nginx.conf.erb" y "nginx.repo.erb "en el cual esta el código mencionado anteriormente en paso numero 5 y numero 7 respectivamente, pero como forma recetas, y con sus respectivas variables.
 
-3. Aprovisionamiento de manera automática mediante vagrant
+3- Aprovisionamiento de manera automática mediante vagrant
 
 Después de configurar, el VagrantFile, y las recetas de cada una de las carpetas de "cookbooks" correctamente, procedemos a ubicarnos en la carpeta donde esta almacenada el archivo "Vagratfile" y a continuación ejecutamos el comando `vagrant up`, el cual de manera automática comienza a levantar las cuatro máquinas virtuales con sus respectivas especificaciones configuradas en el vagrantfile de manera automática
 
 # Evidencia del funcionamiento del balanceador de cargas 
 
 ![pruebagiff2](https://cloud.githubusercontent.com/assets/23728734/23819979/b9882fd2-05dc-11e7-80e7-c52e3d1e9a33.gif)
+
+La primera web (web) hace una consulta en la base de datos, obteniendo la fila con el nombre igual a homero,
+La segunda web (web2) hace una consulta, obteniendo la fila con el nombre igual a flandersm, de esta manera podemos apreciar como cambian las web dependiendo de las pediciones (en este caso refrescando la página) que se le hagan al balanceador.
 
 # Problemas presentados durante el desarrollo de la actividad
 
