@@ -160,6 +160,60 @@ end
 
 2. Configuración de los cookbooks para la máquina balanceadora de cargas
 
+A continuación mostraré únicamente el arbol de carpetas de la máquina que esta encargada de hacer el balanceo de cargas
 
 ![tree bc](https://cloud.githubusercontent.com/assets/23728734/23819629/d014f9ac-05d6-11e7-9c76-980e3e491763.png)
+
+Se copio el diseño de la estructura de las carpetas de las demas máquinas virtuales trabajadas en clase previamente, para seguir el orden en la estructura de esta máquina virtual
+
+En la carpeta attributes, hay un archivo llamado "default.rb" en el cual se establecen las variables utilizadas en las demas configuraciones que se mostrarán proximamente, esto es para facilitar cambios a futuro, mendiante la ayuda de variables
+
+En la carpeta recipes, existen 2 archivos, el primero llamado "default.rb" el cual simplemente hace el llamado al segundo archivo llamado "installbc.rb" con el siguiente código `include_recipe 'bc::installbc'`. En el segundo archivo, se verán los comandos anteriormente mencionados en esta guia, pero de manera automatizada
+
+```
+template '/etc/yum.repos.d/nginx.repo' do
+  source 'nginx.repo.erb'
+end
+
+
+bash 'install nginx' do
+code <<-EOH
+ yum -y install nginx
+  EOH
+end
+
+bash 'open port' do
+  code <<-EOH
+  iptables -I INPUT 5 -p tcp -m state --state NEW -m tcp --dport 8080 -j ACCEPT
+  service iptables save
+  EOH
+end
+
+template '/etc/nginx/nginx.conf' do
+  source 'nginx.conf.erb'
+  variables(
+   ip: node[:bc][:ip],
+   ip2: node[:bc][:ip2]	
+)
+end
+
+bash 'run nginx' do
+code <<-EOH
+ service httpd stop
+ nginx
+  EOH
+end
+```
+En este vemos todos los pasos previamente explicados, pero para ser ejecutados de manera automatica. También se puede ver como en archivo hace llamado a la siguiente carpeta que explicaré a continuación.
+
+De manera ordenada continuamos con las siguientes carpetas llamadas templates/default y con dos archivos, llamados "nginx.conf.erb" y "nginx.repo.erb "en el cual esta el código mencionado anteriormente en paso numero 5 y numero 7 respectivamente, pero como forma recetas, y con sus respectivas variables.
+
+3. Aprovicionamiento de manera automatica mendiante vagrant
+
+Después de configurar, el VagrantFile, y las recetas de cada una de las carpetas de "cookbooks" correctamente, procedemos a ubicarnos en la carpeta donde esta almacenada el archivo "Vagratfile" y a continuación ejecutamos el comando `vagrant up`, el cual de manera automatica comienza a levantar las cuatro máquinas virtuales con sus respectivas especificaciones configuradas en el vagrantfile de manera automatica
+
+
+
+
+# Problemas presentados durante el desarrollo de la actividad
 
