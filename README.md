@@ -218,6 +218,7 @@ Después de configurar, el VagrantFile, y las recetas de cada una de las carpeta
 
 # Evidencia del funcionamiento del balanceador de cargas 
 
+![pruebagiff2](https://cloud.githubusercontent.com/assets/23728734/23819979/b9882fd2-05dc-11e7-80e7-c52e3d1e9a33.gif)
 
 # Problemas presentados durante el desarrollo de la actividad
 
