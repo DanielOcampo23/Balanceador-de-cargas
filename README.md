@@ -223,10 +223,14 @@ Después de configurar, el VagrantFile, y las recetas de cada una de las carpeta
 
 # Problemas presentados durante el desarrollo de la actividad
 
-El primer problema presentado durante el desarrollo de esta actividad, fue al tratar de instalar nginx ya que como anteriormente lo mencionaba para poder hacer la correcta instalación toca cambiar el repositorio, o si no el trata de descargar las configuraciones del repositorio que tiene por defecto y durante la instalación ocurre el error.
+El primer problema presentado durante el desarrollo de esta actividad, fue al tratar de instalar nginx ya que como anteriormente lo mencionaba para poder hacer la correcta instalación es necesario cambiar el repositorio, si no el sistema trata de descargar las configuraciones del repositorio que tiene por defecto y durante la instalación ocurre el error, ya que no se encontraron las dependencias de este software.
 
-El segundo problema presentado fue 
+El segundo problema presentado fue el poco conocimiento del php, por lo cual tuve que ver un pequeño tutorial en youtube para poder aprender lo basico para poder configurar algunas recetas.
 
+El tercer problema fue aprender los comandos para realizar la automatización de la instalación y la configuración del Nginx, como manejar las variables de los templates, ejecutar comandos bash en la máquina virtual automáticamente.
 
 
 # Conclusión
+
+Mediante esta actividad, aprendí la importancia de automatizar los sistemas mediante los servicios que nos da vagrant. Este entorno nos permite un desarrollo mucho más optimizado, ya que cada vez que necesitemos el balanceador de cargas únicamente tenemos que aprovisionar y listo. 
+Por otro lado el balanceador de cargas es un componente muy importante en la arquitectura de software ya que esto cuando se implementa en un sistema grande, nos esta garantizando la escalabilidad y la disponiblidad del sistema.
