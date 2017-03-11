@@ -160,3 +160,6 @@ end
 
 2. Configuración de los cookbooks para la máquina balanceadora de cargas
 
+
+![tree bc](https://cloud.githubusercontent.com/assets/23728734/23819629/d014f9ac-05d6-11e7-9c76-980e3e491763.png)
+
