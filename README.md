@@ -2,6 +2,7 @@
 Balanceador de cargas automatizado 
 
 Daniel Steven Ocampo
+14103032
 
 # Objetivos
 
