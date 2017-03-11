@@ -1,0 +1,19 @@
+<?php
+$con = mysql_connect("<%=@ip%>","<%=@usuario%>","<%=@password%>");
+if (!$con)
+  {
+  die('Could not connect: ' . mysql_error());
+  }
+
+mysql_select_db("database1", $con);
+
+$result = mysql_query("SELECT * FROM example ex WHERE ex.age = 25");
+
+while($row = mysql_fetch_array($result))
+  {
+  echo " name= " . $row['name'] . " age= " . $row['age'];
+  echo "<br />";
+  }
+
+mysql_close($con);
+?>
